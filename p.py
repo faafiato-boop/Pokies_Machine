@@ -1,3 +1,6 @@
+# TF 1/04/2026
+# pokies.py
+
 import random
 
 # Symbols for slots
