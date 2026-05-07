@@ -1,6 +1,7 @@
 # TF 1/04/2026
 # pokies.py
 
+# Imports random module so slot machine randomly chooses symbols
 import random
 
 # Symbols for slots
@@ -9,16 +10,24 @@ symbols = ["7", "💎", "🍋", "🍒", "🍀", "🎲"]
 # --- FUNCTIONS ---
 
 def check_win(line):
+    """
+    Checks if all 3 symbols in a row match
+    """
     return line[0] == line[1] == line[2]
 
 
 def process_spin(slot_machine, spin_cost, player_profile):
+    """
+    Processes the spin result and calculates any winnings
+    """
     total_winnings = 0
     won = False
 
+    # Checks each row is in slot_machine
     for row in slot_machine:
+        
         if check_win(row):
-            winnings = round(spin_cost * 10, 2)  # ✅ Rounded
+            winnings = round(spin_cost * 10, 2) 
             total_winnings += winnings
             print(f"JACKPOT! You matched {row[0]}! You won ${winnings}!")
             won = True
@@ -61,7 +70,7 @@ def check_marketing_status(player_profile):
         player_profile["target_ads"] = True
     else:
         print("\nKeep playing to climb the leaderboard!")
-        player_profile["target_ads"] = False  # ✅ Reset if not whale
+        player_profile["target_ads"] = False  
 
 
 def get_starting_balance():
@@ -105,7 +114,7 @@ def main():
         while True:
             try:
                 spin_cost = float(input(
-                    f"Your balance is ${player_profile['balance']}\nHow much would you like to bet? $"
+                    f"How much would you like to bet? $"
                 ))
 
                 if spin_cost <= 0:
@@ -139,7 +148,7 @@ def main():
 
         # Update high score (as integer)
         if player_profile["balance"] > player_profile["high_score"]:
-            player_profile["high_score"] = int(player_profile["balance"])  # ✅ Fixed type
+            player_profile["high_score"] = int(player_profile["balance"])  
 
         # Marketing check
         check_marketing_status(player_profile)
